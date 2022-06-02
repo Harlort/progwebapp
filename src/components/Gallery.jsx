@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import "../App.css"
 import { useNavigate } from "react-router-dom";
 import HighlightOffTwoToneIcon from '@mui/icons-material/HighlightOffTwoTone';
-import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 import { ArrowBackOutlined } from '@mui/icons-material';
 
 function Gallery() {
