@@ -2,26 +2,26 @@ import React, { useEffect, useState } from 'react'
 import "../App.css"
 import { useNavigate } from "react-router-dom";
 import HighlightOffTwoToneIcon from '@mui/icons-material/HighlightOffTwoTone';
-import { ArrowBackOutlined } from '@mui/icons-material';
+import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
 
 function Gallery() {
     let navigate = useNavigate();
+    
     let images;
-
-    const initStorage = JSON.parse(localStorage.getItem("images") || [])
-    const [local, setLocal] = useState(initStorage)
+    const initLocal = JSON.parse(localStorage.getItem("photos") || [])
+    const [local, setLocal] = useState(initLocal)
     
     if(local.length !== 0){
         images = local;
     }
-
-    const deleteStorage = (key,data) => {
+    
+    const deleteLocal = (key,data) => {
         const updatedImages =  local.filter(i => data.id !== i.id)
         setLocal([...updatedImages])
     }
 
     useEffect(() => {
-        localStorage.setItem('images', JSON.stringify(local))
+        localStorage.setItem('photos', JSON.stringify(local))
     },[local])
 
   return (
@@ -29,29 +29,34 @@ function Gallery() {
         
         <h1>Photo Gallery</h1>
         <div className="backButton__Container">
-        <ArrowBackOutlined style={{fontSize: 40,color:"hotpink",cursor:"pointer"}} onClick={() => {navigate("/")}}/>
+        <ArrowBackRoundedIcon style={{fontSize: 40,color:"hotpink",cursor:"pointer"}} onClick={() => {navigate("/")}}/>
         <h2 onClick={() => {navigate("/")}}>BACK</h2>
         </div>
-        <div className='photo__Grid' >
+        <div className='picture__Grid' >
         {local.length > 0 ?
         
         images.map((image,index) => (
             
-            <div className="photo__box" key={index}>
+            <div className="picture__box" key={index}>
             <div className="image__container">
             
             <div className="deleteButton__Container">
-                <HighlightOffTwoToneIcon style={{ fontSize:40,color: 'hotpink', cursor:'pointer' }} onClick={() => deleteStorage(index,image)}/>
+                <HighlightOffTwoToneIcon style={{ fontSize:40,color: 'hotpink', cursor:'pointer' }} onClick={() => deleteLocal(index,image)}/>
                 </div>
                 
-            <img  src={image.src} alt="" />
+            <img  src={image.src} alt=""/>
             
             </div>
+            
+            
+            
         </div>
         ))
-            : <h3>No photos taken</h3>
-        }
-        </div>
+            : <h3>Nothing in your collection</h3>
+       }
+       </div>
+
+
     </div>
   )
 }
