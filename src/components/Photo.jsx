@@ -48,7 +48,7 @@ const Photo = () => {
   };
 
   const takePhoto = async () => {
-    const width = 550;
+    const width = 450;
     const height = width / (16 / 9);
 
     let video = videoRef.current;
